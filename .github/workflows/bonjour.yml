@@ -3,6 +3,8 @@ on:
   - push
 jobs:
   dire_bonjour:
+    container:
+        image: ghcr.io/cicd-lectures/gitpod:latest
     runs-on: ubuntu-20.04
     steps:
       - run: sudo apt-get update

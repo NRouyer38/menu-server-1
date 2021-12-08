@@ -7,4 +7,6 @@ jobs:
     steps:
       - run: echo "Bonjour 👋"
       - run: ls -l # Liste les fichier du répertoire courant
-      - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
+      - run: cat README.md 
+      - name: Check out repository code
+        uses: actions/checkout@v2# Affiche le contenu du fichier `README.md` à la base du dépôt

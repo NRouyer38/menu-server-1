@@ -1,6 +1,6 @@
 == Projet de gestion de menu pour la cantina de Mos-Estafette
 
-=== Lancer le projet
+### Lancer le projet
 
 ```bash
 ./executer.sh

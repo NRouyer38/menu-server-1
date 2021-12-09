@@ -2,13 +2,13 @@ name: Bonjour
 on:
   - push
 jobs:
-  dire_bonjour:
-    container:
-        image: ghcr.io/cicd-lectures/gitpod:latest
-        options: --user=root
+  
+  run_maven:
     runs-on: ubuntu-20.04
     steps:
-      - run: echo "Bonjour 👋"
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: cat README.md | cowsay  # Affiche le contenu du fichier `README.md` à la base du dépôt
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+      - name: Check Version
+        run: java -version && mvn -version && mvn help:effective-pom

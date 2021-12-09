@@ -1,0 +1,21 @@
+name: CI
+on:
+  - push
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Check Version
+        run: java -version && mvn -version && mvn help:effective-pom
+      - name: Build application
+        run: mvn package
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: menu-server
+          path: target/menu-server.jar

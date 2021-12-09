@@ -11,5 +11,5 @@ jobs:
       - run: sudo apt-get install cowsay -y
       - run: echo "Bonjour 👋"
       - name: Check out repository code
-        uses: actions/checkout@v2 
+        uses: actions/checkout@v2 --user=root
       - run: cat README.md | cowsay  # Affiche le contenu du fichier `README.md` à la base du dépôt

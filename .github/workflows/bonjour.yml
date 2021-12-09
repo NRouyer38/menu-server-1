@@ -8,8 +8,6 @@ jobs:
         options: --user=root
     runs-on: ubuntu-20.04
     steps:
-      - run: sudo apt-get update
-      - run: sudo apt-get install cowsay -y
       - run: echo "Bonjour 👋"
       - name: Check out repository code
         uses: actions/checkout@v2

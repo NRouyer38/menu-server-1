@@ -5,11 +5,12 @@ jobs:
   dire_bonjour:
     container:
         image: ghcr.io/cicd-lectures/gitpod:latest
+        options: --user=root
     runs-on: ubuntu-20.04
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install cowsay -y
       - run: echo "Bonjour 👋"
       - name: Check out repository code
-        uses: actions/checkout@v2 --user=root
+        uses: actions/checkout@v2
       - run: cat README.md | cowsay  # Affiche le contenu du fichier `README.md` à la base du dépôt

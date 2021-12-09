@@ -14,6 +14,8 @@ import com.cicdlectures.menuserver.dto.MenuDto;
 import com.cicdlectures.menuserver.service.CreateMenuService;
 import com.cicdlectures.menuserver.service.ListMenuService;
 
+import com.cicdlectures.menuserver.repository.MenuRepository;
+
 @RestController
 public class MenuController {
 
@@ -36,5 +38,10 @@ public class MenuController {
   @ResponseStatus(HttpStatus.CREATED)
   public MenuDto createMenu(@RequestBody MenuDto menu) {
     return createMenuService.createMenu(menu);
+  }
+
+  @DeleteMapping("/menus/{id}")
+  void deleteEmployee(@PathVariable Long id) {
+    repository.deleteById(id);
   }
 }

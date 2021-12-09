@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: '11'
       - name: Check Version
         run: java -version && mvn -version && mvn help:effective-pom

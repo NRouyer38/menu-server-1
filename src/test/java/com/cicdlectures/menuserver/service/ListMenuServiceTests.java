@@ -3,6 +3,7 @@ package com.cicdlectures.menuserver.service;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
+import java.util.Arrays;
 
 import com.cicdlectures.menuserver.dto.MenuDto;
 import com.cicdlectures.menuserver.dto.DishDto;
@@ -33,8 +34,43 @@ public class ListMenuServiceTests {
   }
   
   @Test
-  @DisplayName("lists all known menus")
-  public void listsKnownMenus() {
-    when(menuRepository.findAll()).thenReturn(null);
-  }
+    @DisplayName("lists all known menus")
+    public void listsKnownMenus() {
+      // Défini une liste de menus avec un menus.
+      Iterable<Menu> existingMenus = Arrays.asList(
+        new Menu(
+          Long.valueOf(1),
+          "Christmas menu",
+          new HashSet<>(
+            Arrays.asList(
+              new Dish(Long.valueOf(1), "Tartiflette", null),
+              new Dish(Long.valueOf(2), "Reblochon de Savoie", null)
+            )
+          )
+        )
+      );  
+
+      // On configure le menuRepository pour qu'il retourne notre liste de menus.
+      when(menuRepository.findAll()).thenReturn(existingMenus);
+
+      // On appelle notre sujet
+      List<MenuDto> gotMenus = subject.listMenus();
+
+      // On défini wantMenus, les résultats attendus
+      Iterable<MenuDto> wantMenus = Arrays.asList(
+          new MenuDto(
+            Long.valueOf(1),
+            "Christmas menu",
+            new HashSet<>(
+              Arrays.asList(
+                new DishDto(Long.valueOf(1), "Tartiflette"),
+                new DishDto(Long.valueOf(2), "Reblochon de Savoie")
+              )
+            )
+          )
+        );
+
+        // On compare la valeur obtenue avec la valeur attendue.
+        assertEquals(wantMenus, gotMenus);
+      }
 }

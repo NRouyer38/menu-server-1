@@ -65,13 +65,6 @@ public class MenuControllerIT {
   private TestRestTemplate template;
 
   public void listExitingMenus() throws Exception {
-    // Effectue une requête GET /menus
-    ResponseEntity<MenuDto[]> response = this.template.getForEntity(getMenusURL().toString(), MenuDto[].class);
-
-    //Parse le payload de la réponse sous forme d'array de MenuDto
-    MenuDto[] gotMenus = response.getBody();
-
-    assertEquals(HttpStatus.OK, response.getStatusCode());
 
     Iterable<MenuDto> wantMenus = Arrays.asList(
           new MenuDto(
@@ -86,7 +79,29 @@ public class MenuControllerIT {
           )
         );
 
-    // On compare la valeur obtenue avec la valeur attendue.
-    assertEquals( wantMenus, gotMenus);
+        
+    Menu menu = new Menu(
+      null,
+      "Christmas menu",
+      new HashSet<>(
+        Arrays.asList(
+          new Dish(null, "Tartiflette",null),
+          new Dish(null, "Reblochon de Savoie",null)
+        )
+      )
+    );
+  
+    menuRepository.save(menu);
+    
+    // Effectue une requête GET /menus
+    ResponseEntity<MenuDto[]> response = this.template.getForEntity(getMenusURL().toString(), MenuDto[].class);
+
+    //Parse le payload de la réponse sous forme d'array de MenuDto
+    MenuDto[] gotMenus = response.getBody();
+
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    assertEquals(wantMenus, Arrays.asList(gotMenus));
+
   }
 }

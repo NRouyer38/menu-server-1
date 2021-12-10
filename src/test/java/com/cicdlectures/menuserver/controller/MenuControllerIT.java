@@ -1,4 +1,4 @@
-package com.cicdlectures.menuserver.service;
+package com.cicdlectures.menuserver.controller;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -72,5 +72,21 @@ public class MenuControllerIT {
     MenuDto[] gotMenus = response.getBody();
 
     assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    Iterable<MenuDto> wantMenus = Arrays.asList(
+          new MenuDto(
+            Long.valueOf(1),
+            "Christmas menu",
+            new HashSet<>(
+              Arrays.asList(
+                new DishDto(Long.valueOf(1), "Tartiflette"),
+                new DishDto(Long.valueOf(2), "Reblochon de Savoie")
+              )
+            )
+          )
+        );
+
+    // On compare la valeur obtenue avec la valeur attendue.
+    assertEquals( wantMenus, gotMenus);
   }
 }

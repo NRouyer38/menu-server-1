@@ -18,3 +18,5 @@ jobs:
         with:
           name: menu-server
           path: target/menu-server.jar
+      - name: Run the Maven verify phase
+        run: mvn --batch-mode --update-snapshots verify

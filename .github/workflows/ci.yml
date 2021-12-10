@@ -34,5 +34,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
+      - run: mvn clean
       - name: Run the Maven verify phase !
         run: mvn --batch-mode --update-snapshots verify
